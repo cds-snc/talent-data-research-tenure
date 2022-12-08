@@ -1,0 +1,8 @@
+arrival_source,onboarded_count,total_count,percentage
+from_other_department,89,241,0.3693
+from_private_sector,89,241,0.3693
+from_academia,28,241,0.1162
+from_other_government,21,241,0.0871
+from_non_profit,9,241,0.0373
+from_other_staffing_program,4,241,0.0166
+unknown_arrival_source,1,241,0.0041

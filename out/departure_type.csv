@@ -1,0 +1,7 @@
+departure_type,departure_count,total_count,departure_type_percentage,departure_type_combined
+to_private_sector,34,84,0.4048,40% (34)
+to_other_department,28,84,0.3333,33% (28)
+to_other_government,9,84,0.1071,11% (9)
+unknown_departure_type,7,84,0.0833,8% (7)
+to_non_profit,4,84,0.0476,5% (4)
+to_academia,2,84,0.0238,2% (2)

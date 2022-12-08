@@ -1,0 +1,14 @@
+fiscal_year,in_or_out_of_national_capital_region,location_in_out_count,total_staff_count,location_percentage
+2016,in_ncr,11,11,1
+2017,in_ncr,50,52,0.9615
+2017,outside_ncr,2,52,0.0385
+2018,in_ncr,69,81,0.8519
+2018,outside_ncr,12,81,0.1481
+2019,in_ncr,65,95,0.6842
+2019,outside_ncr,30,95,0.3158
+2020,in_ncr,59,120,0.4917
+2020,outside_ncr,61,120,0.5083
+2021,in_ncr,64,145,0.4414
+2021,outside_ncr,81,145,0.5586
+2022,in_ncr,70,147,0.4762
+2022,outside_ncr,77,147,0.5238

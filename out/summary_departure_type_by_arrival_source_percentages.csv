@@ -1,0 +1,6 @@
+arrival_source,to_academia,to_non_profit,to_other_department,to_other_government,to_private_sector,unknown_departure_type
+from_academia,0%,0%,0%,100% (1),0%,0%
+from_non_profit,50% (2),0%,25% (1),0%,25% (1),0%
+from_other_department,0%,0%,67% (22),6% (2),24% (8),3% (1)
+from_other_government,0%,18% (2),18% (2),36% (4),9% (1),18% (2)
+from_private_sector,0%,6% (2),9% (3),6% (2),71% (24),9% (3)

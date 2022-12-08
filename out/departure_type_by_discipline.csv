@@ -1,0 +1,32 @@
+discipline_initial,departure_type,departure_count,total_count,departure_type_percentage
+Admin / Operations,to_other_department,8,9,0.8889
+Admin / Operations,to_other_government,1,9,0.1111
+Design,to_non_profit,1,11,0.0909
+Design,to_other_department,1,11,0.0909
+Design,to_other_government,2,11,0.1818
+Design,to_private_sector,6,11,0.5455
+Design,unknown_departure_type,1,11,0.0909
+Design Research,to_academia,1,5,0.2
+Design Research,to_non_profit,1,5,0.2
+Design Research,to_other_department,1,5,0.2
+Design Research,to_other_government,2,5,0.4
+Leadership,to_academia,1,8,0.125
+Leadership,to_other_department,2,8,0.25
+Leadership,to_other_government,1,8,0.125
+Leadership,to_private_sector,4,8,0.5
+Outreach,to_other_department,5,7,0.7143
+Outreach,to_private_sector,1,7,0.1429
+Outreach,unknown_departure_type,1,7,0.1429
+Policy,to_other_department,4,6,0.6667
+Policy,to_other_government,2,6,0.3333
+Product Management,to_non_profit,1,6,0.1667
+Product Management,to_private_sector,3,6,0.5
+Product Management,unknown_departure_type,2,6,0.3333
+Software Development,to_other_department,5,27,0.1852
+Software Development,to_other_government,1,27,0.037
+Software Development,to_private_sector,18,27,0.6667
+Software Development,unknown_departure_type,3,27,0.1111
+Stakeholder Engagement,to_non_profit,1,4,0.25
+Stakeholder Engagement,to_other_department,2,4,0.5
+Stakeholder Engagement,to_private_sector,1,4,0.25
+Talent,to_private_sector,1,1,1

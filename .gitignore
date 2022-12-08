@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Exclude CSVs with talent data
+source/*.csv
+
+# Exclude LibreOffice temporary files
+.~lock*
+
+# Exclude the .env file
+.env
