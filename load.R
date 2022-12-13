@@ -961,6 +961,21 @@ tenure_data_duration <- tenure_data %>%
 
 # For these calculations, we'll use "tenure" to refer to all CDSers (including recent hires) and "duration" to refer to CDSers' average stay minus folks hired within the past 12 months.
 
+# Reusable "bucketing" function
+group_by_bins_duration_years <- function(df) {
+  
+  df %>% 
+    mutate(
+      duration_years_bins = cut(
+        duration_years, 
+        c(0:3, Inf),
+        labels = c("Under 1 year", "1-2 years", "2-3 years", "3+ years")
+      )
+    ) %>% 
+    group_by(duration_years_bins)
+  
+}
+
 # Exclude people that have left to calculate current staff tenure:
 tenure_data_duration %>%
   filter(is.na(cds_end_date)) %>%
@@ -972,14 +987,7 @@ tenure_data_duration %>%
 # Exclude people that have left, and bucket current people here:
 tenure_data_duration %>%
   filter(is.na(cds_end_date)) %>%
-  mutate(
-    bins_duration_years = cut(
-      duration_years, 
-      c(0:3, Inf),
-      labels = c("Under 1 year", "1-2 years", "2-3 years", "3+ years")
-      )
-  ) %>% 
-  group_by(bins_duration_years) %>%
+  group_by_bins_duration_years %>% 
   count(name = "headcount") %>%
   write_out_csv("tenure_headcount_bins")
 
@@ -1106,6 +1114,26 @@ group_level_data_with_latest_level <- group_level_data_with_latest_level %>%
     )
   )
 
+# Bring in duration data to compare promotion rates to time at CDS
+# Using tenure_data_duration which merges connected tours into single entries
+tenure_data_duration_latest <- tenure_data_duration %>% 
+  group_by(full_name) %>% 
+  mutate(
+    duration_days_latest = last(duration_days, order_by = tour_number),
+    duration_years_latest = last(duration_years, order_by = tour_number),
+  ) %>% 
+  ungroup() %>% 
+  select(full_name, duration_days_latest, duration_years_latest) %>%
+  distinct() %>% 
+  rename(
+    duration_days = "duration_days_latest",
+    duration_years = "duration_years_latest"
+  )
+
+# Merge this in to group_level_data_with_latest_level
+group_level_data_with_latest_level <- group_level_data_with_latest_level %>% 
+  left_join(tenure_data_duration_latest, by = "full_name")
+
 # Original calculation using the combination of a classification change or a level increase (assuming that these generally indicate a salary increase / promotion)
 calculate_classification_change_or_level_increase <- function(df) {
   
@@ -1122,17 +1150,24 @@ calculate_classification_change_or_level_increase <- function(df) {
 }
 
 # New calculation using estimated (earliest and latest) salary totals
-calculate_promotion_totals <- function(df) {
+calculate_promotion_totals <- function(df, sort_results = TRUE) {
   
-  df %>% 
+  df <- df %>% 
     summarize(
       has_promotion_count = sum(has_promotion),
       total_count = n()
     ) %>% 
     mutate(
       percentage = has_promotion_count / total_count
-    ) %>% 
-    arrange(desc(percentage), desc(has_promotion_count))
+    )
+  
+  if(sort_results == TRUE) {
+    df %>% 
+      arrange(desc(percentage), desc(has_promotion_count))
+  }
+  else {
+    df
+  }
   
 }
 
@@ -1144,6 +1179,12 @@ group_level_data_with_latest_level %>%
   filter(earliest_group != "SU") %>% 
   calculate_promotion_totals %>% 
   write_out_csv("classification_promotion_excluding_students")
+
+# Promotions by tenure bins
+group_level_data_with_latest_level %>% 
+  group_by_bins_duration_years %>% 
+  calculate_promotion_totals(sort_results = FALSE) %>% 
+  write_out_csv("classification_promotion_by_duration_years_bins")
 
 # Note: excludes groups with 0 changes from the CSV export
 # This uses the *latest* group for analysis, not individuals' starting group
